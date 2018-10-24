@@ -16,11 +16,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:424d6a3ee46171455054a1d821c658c22802a798ba8e687fdc2edaca9eb30c8a"
+  digest = "1:2eee66a4d24ba0bf29a6e1bb529be64a7b391f5967be1016b13a30761aa752b2"
   name = "github.com/drone/drone-template-lib"
   packages = ["template"]
   pruneopts = "UT"
-  revision = "5748d3149f4859c6d6cf43edb4fa35bba379c918"
+  revision = "4019baa6c5944c4d0b22f9ed9a95802e6f70f5d6"
 
 [[projects]]
   digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
