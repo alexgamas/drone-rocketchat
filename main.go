@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"github.com/urfave/cli"
+	"log"
 	"os"
-
-	"github.com/codegangsta/cli"
-	_ "github.com/joho/godotenv/autoload"
 )
 
-var version string // build number set at compile-time
+var (
+	version = "0.0.0"
+)
 
 func main() {
 
@@ -176,6 +176,21 @@ func main() {
 		// prev build args
 		//
 
+		cli.StringFlag{
+			Name:   "commit.pull",
+			Usage:  "git pull request",
+			EnvVar: "DRONE_PULL_REQUEST",
+		},
+		cli.StringFlag{
+			Name:   "build.tag",
+			Usage:  "build tag",
+			EnvVar: "DRONE_TAG",
+		},
+		cli.Int64Flag{
+			Name:   "job.started",
+			Usage:  "job started",
+			EnvVar: "DRONE_JOB_STARTED",
+		},
 		cli.IntFlag{
 			Name:   "prev.build.number",
 			Usage:  "previous build number",
@@ -223,12 +238,35 @@ func main() {
 			Usage:  "Rocket.chat url",
 			EnvVar: "PLUGIN_URL",
 		},
+		cli.StringFlag{
+			Name:   "template",
+			Usage:  "Rocket.template",
+			EnvVar: "PLUGIN_TEMPLATE",
+		},
+
+		cli.StringFlag{
+			Name:   "image",
+			Usage:  "Rocket.image.url",
+			EnvVar: "PLUGIN_IMAGE_URL",
+		},
+		cli.StringFlag{
+			Name:   "icon.url",
+			Usage:  "Rocket.icon.url",
+			EnvVar: "PLUGIN_ICON_URL",
+		},
+		cli.StringFlag{
+			Name:   "icon.emoji",
+			Usage:  "Rocket.emoji.url",
+			EnvVar: "PLUGIN_ICON_EMOJI",
+		},
 	}
 
-	app.Run(os.Args)
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 }
 
-func run(c *cli.Context) {
+func run(c *cli.Context) error {
 	plugin := Plugin{
 		Repo: Repo{
 			Owner:   c.String("repo.owner"),
@@ -254,6 +292,7 @@ func run(c *cli.Context) {
 			Sha:     c.String("commit.sha"),
 			Ref:     c.String("commit.sha"),
 			Link:    c.String("commit.link"),
+			Pull:    c.String("commit.pull"),
 			Branch:  c.String("commit.branch"),
 			Message: c.String("commit.message"),
 			Author: Author{
@@ -270,11 +309,12 @@ func run(c *cli.Context) {
 			AuthToken: c.String("authToken"),
 			Channel:   c.String("channel"),
 			Url:       c.String("url"),
+			Template:  c.String("template"),
+			ImageURL:  c.String("image"),
+			IconURL:   c.String("icon.url"),
+			IconEmoji: c.String("icon.emoji"),
 		},
 	}
 
-	if err := plugin.Exec(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	return plugin.Exec()
 }

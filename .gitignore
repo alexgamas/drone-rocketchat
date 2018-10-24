@@ -24,5 +24,14 @@ _testmain.go
 *.prof
 .env
 
+
+release/
+vendor/
+
+coverage.out
+
 # Name of your binary
 drone-plugin-starter
+/drone-rocketchat
+.idea/
+drone-rocketchat

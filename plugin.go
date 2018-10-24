@@ -1,6 +1,10 @@
 package main
 
-import "./rocketchat"
+import (
+	"./rocketchat"
+	"fmt"
+	"github.com/drone/drone-template-lib/template"
+)
 
 type (
 	Repo struct {
@@ -29,6 +33,7 @@ type (
 		Sha     string
 		Ref     string
 		Link    string
+		Pull    string
 		Branch  string
 		Message string
 		Author  Author
@@ -47,8 +52,12 @@ type (
 		Username  string
 		Password  string
 		Url       string
+		Template  string
 		UserId    string
 		AuthToken string
+		IconURL   string
+		IconEmoji string
+		ImageURL  string
 	}
 
 	Plugin struct {
@@ -63,6 +72,29 @@ func (p Plugin) Exec() error {
 
 	client := rocketchat.New(p.Config.Url, p.Config.UserId, p.Config.AuthToken)
 
+	attachment := rocketchat.Attachment{
+		Text:     message(p.Repo, p.Build, p.Commit),
+		Color:    color(p.Build),
+		ImageURL: p.Config.ImageURL,
+	}
+
+	payload := rocketchat.WebHookPostPayload{}
+	payload.Username = p.Config.Username
+	payload.Attachments = []*rocketchat.Attachment{&attachment}
+	payload.IconUrl = p.Config.IconURL
+	payload.IconEmoji = p.Config.IconEmoji
+
+	if p.Config.Template != "" {
+
+		txt, err := template.RenderTrim(p.Config.Template, p)
+
+		if err != nil {
+			return err
+		}
+
+		attachment.Text = txt
+	}
+
 	if p.Config.Username != "" {
 		req := &rocketchat.LoginRequest{p.Config.Username, p.Config.Password}
 		err := client.Login(req)
@@ -70,5 +102,39 @@ func (p Plugin) Exec() error {
 			return err
 		}
 	}
-	return client.ChatPostMessage(p.Config.Text, p.Config.Channel)
+	return client.PostMessage(&payload)
+}
+
+func message(repo Repo, build Build, commit Commit) string {
+	return fmt.Sprintf("*%s* <%s|%s/%s#%s> (%s) by %s",
+		build.Status,
+		build.Link,
+		repo.Owner,
+		repo.Name,
+		commit.Sha[:8],
+		commit.Branch,
+		commit.Author,
+	)
+}
+
+func fallback(repo Repo, build Build, commit Commit) string {
+	return fmt.Sprintf("%s %s/%s#%s (%s) by %s",
+		build.Status,
+		repo.Owner,
+		repo.Name,
+		commit.Sha[:8],
+		commit.Branch,
+		commit.Author,
+	)
+}
+
+func color(build Build) string {
+	switch build.Status {
+	case "success":
+		return "good"
+	case "failure", "error", "killed":
+		return "danger"
+	default:
+		return "warning"
+	}
 }

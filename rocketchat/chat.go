@@ -1,20 +1,28 @@
 package rocketchat
 
+type WebHookPostPayload struct {
+	Text        string        `json:"text,omitempty"`
+	Channel     string        `json:"channel,omitempty"`
+	Username    string        `json:"alias,omitempty"`
+	IconUrl     string        `json:"avatar,omitempty"`
+	IconEmoji   string        `json:"emoji,omitempty"`
+	Attachments []*Attachment `json:"attachments,omitempty"`
+}
+
 type ChatPostMessageAPIRequest struct {
 	Text    string `json:"text"`
 	Channel string `json:"channel"`
 	Avatar  string `json:"avatar"`
 }
 
-func (rc *RocketChat) ChatPostMessage(channelId string, text string) error {
+func (rc *RocketChat) PostMessage(payload *WebHookPostPayload) error {
 
-	req := ChatPostMessageAPIRequest{Channel: "geral", Text: "Teste de mensagem", Avatar: "http://res.guggy.com/logo_128.png"}
-
-	_, err := rc.PostRequest(chatPostMessageApiEndpoint, req)
+	_, err := rc.PostRequest(chatPostMessageApiEndpoint, payload)
 
 	if err != nil {
 		return err
 	}
 
 	return nil
+
 }
