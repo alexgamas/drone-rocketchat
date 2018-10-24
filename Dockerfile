@@ -5,6 +5,6 @@ LABEL maintainer="Drone.IO Community <drone-dev@googlegroups.com>" \
   org.label-schema.vendor="Drone.IO Community" \
   org.label-schema.schema-version="1.0"
 
-COPY drone-rocketchat /bin/drone-rocketchat
+COPY release/linux/amd64/drone-rocketchat /bin/
 
 ENTRYPOINT ["/bin/drone-rocketchat"]
