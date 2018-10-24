@@ -47,8 +47,8 @@ type (
 		Avatar string
 	}
 
+	//Config plugin-specific parameters and secrets
 	Config struct {
-		// plugin-specific parameters and secrets
 		Channel   string
 		Text      string
 		Username  string
