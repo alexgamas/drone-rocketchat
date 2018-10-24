@@ -1,8 +1,10 @@
 package main
 
 import (
-	"./rocketchat"
+	"drone-rocketchat-plugin/rocketchat"
 	"fmt"
+	"strings"
+
 	"github.com/drone/drone-template-lib/template"
 )
 
@@ -68,6 +70,10 @@ type (
 	}
 )
 
+func isEmpty(s *string) bool {
+	return s == nil || len(strings.TrimSpace(*s)) == 0
+}
+
 func (p Plugin) Exec() error {
 
 	client := rocketchat.New(p.Config.Url, p.Config.UserId, p.Config.AuthToken)
@@ -85,7 +91,7 @@ func (p Plugin) Exec() error {
 	payload.IconUrl = p.Config.IconURL
 	payload.IconEmoji = p.Config.IconEmoji
 
-	if p.Config.Template != "" {
+	if !isEmpty(&p.Config.Template) {
 
 		txt, err := template.RenderTrim(p.Config.Template, p)
 
@@ -97,13 +103,16 @@ func (p Plugin) Exec() error {
 
 	}
 
-	if p.Config.Username != "" {
+	if !isEmpty(&p.Config.Username) && !isEmpty(&p.Config.Password) {
 		req := &rocketchat.LoginRequest{Username: p.Config.Username, Password: p.Config.Password}
 		err := client.Login(req)
 		if err != nil {
 			return err
 		}
+	} else {
+		return fmt.Errorf("username and password not provided")
 	}
+
 	return client.PostMessage(&payload)
 }
 
