@@ -84,7 +84,7 @@ func (p Plugin) Exec() error {
 		ImageURL: p.Config.ImageURL,
 	}
 
-	payload := rocketchat.WebHookPostPayload{}
+	payload := rocketchat.ChatPostMessageAPIRequest{}
 	payload.Channel = p.Config.Channel
 	payload.Username = p.Config.Username
 	payload.Attachments = []*rocketchat.Attachment{&attachment}
