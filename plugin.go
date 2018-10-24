@@ -96,7 +96,7 @@ func (p Plugin) Exec() error {
 	}
 
 	if p.Config.Username != "" {
-		req := &rocketchat.LoginRequest{p.Config.Username, p.Config.Password}
+		req := &rocketchat.LoginRequest{Username: p.Config.Username, Password: p.Config.Password}
 		err := client.Login(req)
 		if err != nil {
 			return err
@@ -131,10 +131,10 @@ func fallback(repo Repo, build Build, commit Commit) string {
 func color(build Build) string {
 	switch build.Status {
 	case "success":
-		return "good"
+		return "rgb(46, 184, 134)"
 	case "failure", "error", "killed":
-		return "danger"
+		return "rgb(163, 2, 0)"
 	default:
-		return "warning"
+		return "rgb(218, 160, 56)"
 	}
 }
