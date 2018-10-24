@@ -1,16 +1,13 @@
-<img src="logo.png">
+<img src="logo.svg">
 
 # drone-rocketchat
 
 [![Join the discussion at https://discourse.drone.io](https://img.shields.io/badge/discourse-forum-orange.svg)](https://discourse.drone.io)
-
 [![Drone questions at https://stackoverflow.com](https://img.shields.io/badge/drone-stackoverflow-orange.svg)](https://stackoverflow.com/questions/tagged/drone.io)
-
 [![Go Report](https://goreportcard.com/badge/github.com/alexgamas/drone-rocketchat)](https://goreportcard.com/report/github.com/alexgamas/drone-rocketchat)
-
 [![](https://images.microbadger.com/badges/image/alexgamas/drone-rocketchat.svg)](https://microbadger.com/images/alexgamas/drone-rocketchat "Get your own image badge on microbadger.com")
 
-Drone plugin for sending Rocket.Chat notifications. For the usage information and a listing of the available options please take a look at [the docs](https://github.com/alexgamas/drone-rocketchat/docs/).
+Drone plugin for sending Rocket.Chat notifications. For the usage information and a listing of the available options please take a look at [the docs](https://github.com/alexgamas/drone-rocketchat/blob/release/0.1/DOCS.md).
 
 ## Build
 
