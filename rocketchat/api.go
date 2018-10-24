@@ -35,6 +35,8 @@ func (rc *RocketChat) PostRequest(endpoint string, payload interface{}) ([]byte,
 		req.Header.Add(k, v)
 	}
 
+	req.Header.Add("Content-Type", "application/json")
+
 	if err != nil {
 		return nil, err
 	}

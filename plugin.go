@@ -79,6 +79,7 @@ func (p Plugin) Exec() error {
 	}
 
 	payload := rocketchat.WebHookPostPayload{}
+	payload.Channel = p.Config.Channel
 	payload.Username = p.Config.Username
 	payload.Attachments = []*rocketchat.Attachment{&attachment}
 	payload.IconUrl = p.Config.IconURL
@@ -93,6 +94,7 @@ func (p Plugin) Exec() error {
 		}
 
 		attachment.Text = txt
+
 	}
 
 	if p.Config.Username != "" {
