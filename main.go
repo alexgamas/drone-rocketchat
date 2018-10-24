@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/urfave/cli"
 	"log"
 	"os"
+
+	"github.com/urfave/cli"
 )
 
 var (
@@ -267,6 +268,9 @@ func main() {
 }
 
 func run(c *cli.Context) error {
+
+	//verify when flags (cli.Context) dont come filled.
+
 	plugin := Plugin{
 		Repo: Repo{
 			Owner:   c.String("repo.owner"),
