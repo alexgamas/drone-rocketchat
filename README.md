@@ -5,7 +5,7 @@
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-rocketchat)](https://goreportcard.com/report/github.com/drone-plugins/drone-rocketchat)
 [![](https://images.microbadger.com/badges/image/plugins/rocketchat.svg)](https://microbadger.com/images/plugins/rocketchat "Get your own image badge on microbadger.com")
 
-Drone plugin for sending Slack notifications. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-rocketchat/).
+Drone plugin for sending Rocket.Chat notifications. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-rocketchat/).
 
 ## Build
 
@@ -70,7 +70,7 @@ Plugin parameters:
 
 Please vendor dependencies in a manner compatible with `GOVENDOREXPERIMENT`. All official drone plugins should use [govend](https://github.com/govend/govend) with the `--prune` flag.
 
-The Slack plugin posts build status messages to your channel. The below pipeline configuration demonstrates simple usage:
+The Rocket.Chat plugin posts build status messages to your channel. The below pipeline configuration demonstrates simple usage:
 
 ```yaml
 pipeline:
