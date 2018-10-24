@@ -9,6 +9,14 @@ type ChatPostMessageAPIRequest struct {
 	Attachments []*Attachment `json:"attachments,omitempty"`
 }
 
+type ChatPostMessageAPIResult struct {
+	Success bool
+}
+
+type ChatPinMessageAPIRequest struct {
+	MessageId string `json:"messageId"`
+}
+
 func (rc *RocketChat) PostMessage(payload *ChatPostMessageAPIRequest) error {
 
 	_, err := rc.PostRequest(chatPostMessageApiEndpoint, payload)
@@ -19,4 +27,15 @@ func (rc *RocketChat) PostMessage(payload *ChatPostMessageAPIRequest) error {
 
 	return nil
 
+}
+
+func (rc *RocketChat) PinMessage(payload *ChatPinMessageAPIRequest) error {
+
+	_, err := rc.PostRequest(chatPinMesssageApiEndpoint, payload)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

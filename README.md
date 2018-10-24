@@ -1,4 +1,5 @@
-<img src="logo.svg">
+![rocket.chat-logo](logo.svg)
+
 
 # drone-rocketchat
 
