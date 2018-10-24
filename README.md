@@ -5,7 +5,7 @@
 [![Go Report](https://goreportcard.com/badge/github.com/drone-plugins/drone-rocketchat)](https://goreportcard.com/report/github.com/drone-plugins/drone-rocketchat)
 [![](https://images.microbadger.com/badges/image/plugins/rocketchat.svg)](https://microbadger.com/images/plugins/rocketchat "Get your own image badge on microbadger.com")
 
-Drone plugin for sending Rocket.Chat notifications. For the usage information and a listing of the available options please take a look at [the docs](http://plugins.drone.io/drone-plugins/drone-rocketchat/).
+Drone plugin for sending Rocket.Chat notifications. For the usage information and a listing of the available options please take a look at [the docs](https://github.com/alexgamas/drone-rocketchat/docs/).
 
 ## Build
 
