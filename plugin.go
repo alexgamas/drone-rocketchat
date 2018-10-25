@@ -1,7 +1,7 @@
 package main
 
 import (
-	"drone-rocketchat-plugin/rocketchat"
+	"drone-rocketchat/rocketchat"
 	"fmt"
 	"strings"
 
@@ -9,6 +9,7 @@ import (
 )
 
 type (
+	//Repo data
 	Repo struct {
 		Owner   string
 		Name    string
@@ -19,6 +20,7 @@ type (
 		Trusted bool
 	}
 
+	//Build data
 	Build struct {
 		Number   int
 		Event    string
@@ -30,6 +32,7 @@ type (
 		Link     string
 	}
 
+	//Commit data
 	Commit struct {
 		Remote  string
 		Sha     string
@@ -41,6 +44,7 @@ type (
 		Author  Author
 	}
 
+	//Author data
 	Author struct {
 		Name   string
 		Email  string
@@ -62,6 +66,7 @@ type (
 		ImageURL  string
 	}
 
+	//Plugin main structure
 	Plugin struct {
 		Repo   Repo
 		Build  Build
