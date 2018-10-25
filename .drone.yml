@@ -1,6 +1,6 @@
 workspace:
   base: /go
-  path: src/bulma.solutis.net.br/gamas/drone-rocketchat
+  path: src/drone-rocketchat
 
 pipeline:
   deps:
@@ -9,13 +9,15 @@ pipeline:
     commands:
     - go get -u github.com/golang/dep/cmd/dep
     - dep ensure
+    - dep status
+    
+  test:
+    image: golang:1.11.1
+    pull: true
+    commands:
+    - go vet
+    - go test -cover
 
-#  test:
-#    image: golang:1.11.1
-#    pull: true
-#    commands:
-#    - go vet ./...
-#    - go test -cover ./...
 
   build_linux_amd64:
     image: golang:1.11.1
@@ -31,13 +33,12 @@ pipeline:
   publish_linux_amd64:
     image: plugins/docker
     pull: true
-    secrets: [ docker_username, docker_password ]
     group: docker
-    email: leonado.ornelas@solutis.com.br
     repo: solutisdigital/drone-rocketchat
     auto_tag: true
     auto_tag_suffix: linux-amd64
     dockerfile: Dockerfile
+    secrets: [ docker_username , docker_password ]
     when:
       event: [ push, tag ]
 
