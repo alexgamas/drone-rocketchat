@@ -79,6 +79,7 @@ func isEmpty(s *string) bool {
 	return s == nil || len(strings.TrimSpace(*s)) == 0
 }
 
+//Exec main plugin execution logic ... start here ...
 func (p Plugin) Exec() error {
 
 	client := rocketchat.New(p.Config.Url, p.Config.UserId, p.Config.AuthToken)

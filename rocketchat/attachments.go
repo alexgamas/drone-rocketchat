@@ -1,11 +1,13 @@
 package rocketchat
 
+//AttachmentField -> https://rocket.chat/docs/developer-guides/rest-api/chat/sendmessage/#attachment-field-objects
 type AttachmentField struct {
 	Title string `json:"title"`
 	Value string `json:"value"`
 	Short bool   `json:"short"`
 }
 
+//Attachment -> https://rocket.chat/docs/developer-guides/rest-api/chat/sendmessage/#attachments-detail
 type Attachment struct {
 	Color string `json:"color,omitempty"`
 
