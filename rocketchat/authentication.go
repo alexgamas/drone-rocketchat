@@ -8,21 +8,26 @@ import (
 	"net/http"
 )
 
+//LoginRequest -> https://rocket.chat/docs/developer-guides/rest-api/authentication/login/#payload
 type LoginRequest struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
 }
 
+//LoginResponse -> https://rocket.chat/docs/developer-guides/rest-api/authentication/login/#result
 type LoginResponse struct {
 	Status string             `json:"status"`
 	Data   LoginTokenResponse `json:"data"`
 }
 
+//LoginTokenResponse -> https://rocket.chat/docs/developer-guides/rest-api/authentication/login/#result
 type LoginTokenResponse struct {
 	UserID    string `json:"userId"`
 	AuthToken string `json:"authToken"`
 }
 
+//Login -> Authenticate with the REST API. [/api/v1/login]
+//https://rocket.chat/docs/developer-guides/rest-api/authentication/login/
 func (rc *RocketChat) Login(payload *LoginRequest) error {
 
 	//body io.Reader

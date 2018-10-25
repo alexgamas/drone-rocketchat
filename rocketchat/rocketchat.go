@@ -1,14 +1,15 @@
 package rocketchat
 
+// RocketChat Client
 type RocketChat struct {
 	urlApi    string
 	userId    string
 	authToken string
 }
 
-// cria uma api RocketChat
-func New(urlApi string, userId string, authToken string) *RocketChat {
-	return &RocketChat{urlApi, userId, authToken}
+//New cria uma api RocketChat
+func New(urlAPI string, userID string, authToken string) *RocketChat {
+	return &RocketChat{urlAPI, userID, authToken}
 }
 
 func (rc *RocketChat) httpHeader() map[string]string {
