@@ -30,6 +30,11 @@ func (rc *RocketChat) request(req *http.Request) ([]byte, error) {
 func (rc *RocketChat) PostRequest(endpoint string, payload interface{}) ([]byte, error) {
 	ul := rc.urlApi + endpoint
 	body, err := json.Marshal(payload)
+
+	if err != nil {
+		return nil, err
+	}
+
 	req, err := http.NewRequest(http.MethodPost, ul, bytes.NewBuffer(body))
 
 	for k, v := range rc.httpHeader() {
