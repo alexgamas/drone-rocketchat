@@ -22,10 +22,11 @@ func (rc *RocketChat) request(req *http.Request) ([]byte, error) {
 	return ioutil.ReadAll(res.Body)
 }
 
-func (rc *RocketChat) DoRequest(req *http.Request) ([]byte, error) {
-	return rc.request(req)
-}
+// func (rc *RocketChat) DoRequest(req *http.Request) ([]byte, error) {
+// 	return rc.request(req)
+// }
 
+//PostRequest Low level post request
 func (rc *RocketChat) PostRequest(endpoint string, payload interface{}) ([]byte, error) {
 	ul := rc.urlApi + endpoint
 	body, err := json.Marshal(payload)
@@ -34,6 +35,8 @@ func (rc *RocketChat) PostRequest(endpoint string, payload interface{}) ([]byte,
 	for k, v := range rc.httpHeader() {
 		req.Header.Add(k, v)
 	}
+
+	req.Header.Add("Content-Type", "application/json")
 
 	if err != nil {
 		return nil, err
