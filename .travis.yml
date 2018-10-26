@@ -1,0 +1,17 @@
+sudo: required
+
+language: go
+
+services:
+  - docker
+
+build-linux-amd64:
+  - go get -u github.com/golang/dep/cmd/dep
+  - dep ensure
+  - dep status
+  - go test
+  # Build the binary
+  - GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags '-s -w' -o release/linux/amd64/drone-slack
+  # Build the drone plugin as docker container
+  - docker build -t $TRAVIS_REPO_SLUG .
+
