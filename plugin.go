@@ -1,10 +1,10 @@
 package main
 
 import (
-	"drone-rocketchat/rocketchat"
 	"fmt"
 	"strings"
 
+	"github.com/alexgamas/drone-rocketchat/rocketchat"
 	"github.com/drone/drone-template-lib/template"
 )
 
