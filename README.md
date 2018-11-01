@@ -24,7 +24,7 @@ Build the Docker image with the following commands:
 
 ```
 GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -a -tags netgo -o release/linux/amd64/drone-rocketchat
-docker build --rm -t plugins/rocketchat .
+docker build --rm -t alexgamas/drone-rocketchat .
 ```
 
 ## Usage
@@ -45,5 +45,5 @@ docker run --rm \
   -e DRONE_BUILD_STATUS=success \
   -e DRONE_BUILD_LINK=https://github.com/alexgamas/drone-rocketchat \
   -e DRONE_TAG=0.0.1 \
-  plugins/rocketchat
+  alexgamas/drone-rocketchat
 ```
