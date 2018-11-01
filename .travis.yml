@@ -1,0 +1,23 @@
+sudo: required
+
+language: go
+
+go:
+  - "1.x"
+  - "1.8"
+  - "1.10.x"
+  
+services:
+  - docker
+
+build-linux-amd64:
+  - go get -u github.com/golang/dep/cmd/dep
+  - dep ensure
+  - dep status
+  # - go test
+  # Build the binary
+  - GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -ldflags '-s -w' -o release/linux/amd64/drone-slack
+  
+build-image:
+  # Build the drone plugin as docker container
+  - docker build -t alexgamas/drone-rocketchat .
